@@ -1,23 +1,64 @@
 // @ts-check
 const { test, expect } = require('@playwright/test');
-
-test('has title', async ({ page }) => {
-  await page.goto('https://playwright.dev/');
-
-  // Expect a title "to contain" a substring.
-  await expect(page).toHaveTitle(/Playwright/);
-  //Code to take screenshot
-  await page.screenshot({ path: `screenshot.png` });
+const { LoginPage } = require('../pages/login-page');
+const { UserData } = require('../data/user-data');
+const { MainPage } = require('../pages/main-page');
+test('login test', async ({ page }) => {
+  let userInfo = new UserData("admin8@sft.com", "admin781");
   
-  
+  let loginPage = new LoginPage(page);
+  await loginPage.navigateToInitalPAge();
+  await loginPage.login(userInfo);
 });
 
-test('get started link', async ({ page }) => {
-  await page.goto('https://playwright.dev/');
 
-  // Click the get started link.
-  await page.getByRole('link', { name: 'Get started' }).click();
+test.describe('Lunch edit tests', () => {
+  let userInfo = new UserData("admin8@sft.com", "admin781");
+  let providerinfo;
+  let mainPage;
+  test.beforeEach(async ({ page }) => {
+    let loginPage = new LoginPage(page);
+    await loginPage.navigateToInitalPAge();
+    await loginPage.login(userInfo);
+    mainPage = new MainPage(page);
+  });
 
-  // Expects page to have a heading with the name of Installation.
-  await expect(page.getByRole('heading', { name: 'Installation' })).toBeVisible();
+  test('add new supplier', async ({ page }) => {
+    //on page click lunch edit
+    await mainPage.openLuchEditTab();
+
+    await mainPage.initiateAddingNewSupplier();
+
+    // await page.waitForSelector('input[aria-label="Selected Date"]');
+    
+    // await page.locator('button').filter({ hasText: 'buildclose' }).click();
+    // await page.locator('button').filter({ hasText: 'buildclose' }).click();
+    // await page.locator('button').filter({ hasText: 'add' }).click();
+    
+
+    await page.getByRole('combobox', { name: 'Provider Name' }).click();
+    await page.getByRole('combobox', { name: 'Provider Name' }).fill('testProviderrr');
+    await page.getByLabel('Color', { exact: true }).click();
+    await page.locator('a').filter({ hasText: 'Green' }).first().click();
+
+    await page.getByText('delete', { exact: true }).first().click();
+    await page.getByText('Pagrindiniai Patiekalai (Main Dishes)restaurant').click();
+    await page.getByLabel('Price').fill('1');
+    await page.getByLabel('Count').fill('1');
+    await page.getByLabel('Selection Name').fill('test');
+    await page.getByRole('button', { name: 'Save' }).click();
+
+    await page.pause();
+
+  });
 });
+
+
+
+   // await page.click('input[aria-label="Selected Date"]');
+    // await page.pause();
+    // const dayElement = await page.$('.v-btn__content:has-text("30")');
+    // if (dayElement) {
+    //     await dayElement.click();
+    // }
+    // await page.pause();
