@@ -1,6 +1,6 @@
 export class ProviderData {
-    constructor(username, password) {
-      this.username = username;
-      this.password = password;
+    constructor(providerName, color, ) {
+      this.name = providerName;
+      this.color = color;
     }
   }
