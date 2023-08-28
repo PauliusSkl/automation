@@ -2,5 +2,5 @@
 Bug Busters
 
 To setup and run:
-1. Npm init
-2. Npm playwright test
+1. npm init
+2. npx playwright test
