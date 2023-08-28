@@ -7,6 +7,9 @@ To setup and run:
 2. npx playwright test
 
 
-Value of tests:
 
-Tests covers the most important part of the system adding new provider, dish and making a order as a user.
+Value of tests:
+e2e testing of the main functionalities of the system:
+* adding new providers
+* adding new dishes
+* making an order with a regular user
