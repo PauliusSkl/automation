@@ -11,7 +11,6 @@ export class LoginPage {
   async login(data) {
     await this.page.fill('input[name="email"]', data.username);
     await this.page.fill('input[name="password"]', data.password);
-    //await this.page.click('[data-test="login-button"]');
     await this.page.click('button:has-text("Login")');
     await this.page.waitForLoadState("networkidle");
   }
