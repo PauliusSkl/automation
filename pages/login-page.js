@@ -1,5 +1,3 @@
-import { expect } from "@playwright/test";
-const { UserData } = require ("../data/user-data");
 export class LoginPage {
   constructor(page) {
     this.page = page;

@@ -1,5 +1,3 @@
-import { ProviderData } from "../data/provide-data";
-import { DishData } from "../data/dish-data";
 export class MainPage {
     constructor(page) {
         this.page = page;
